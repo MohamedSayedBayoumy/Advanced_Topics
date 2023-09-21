@@ -3,14 +3,26 @@ import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 import 'home_page.dart';
 
-Future<void> main() async {
-  await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-
+void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
