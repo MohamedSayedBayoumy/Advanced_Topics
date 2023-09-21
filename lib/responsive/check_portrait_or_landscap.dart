@@ -31,45 +31,50 @@ class _CheckPortraitOrLandscapePageState
                   'You have pushed the button this many times:',
                 ),
                 const SizedBox(height: 15),
-                if (orientation == Orientation.portrait) ...[
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 15,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Container(
-                        width: media.width,
-                        height: media.height * .14,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.black)),
-                        alignment: Alignment.center,
-                        child: const Text("data"),
-                      ),
-                    ),
-                  ),
-                ] else ...[
-                  SizedBox(
-                      width: media.width,
-                      height: media.height,
-                      child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
+                AnimatedSwitcher(
+                  transitionBuilder: (child, animation) =>
+                      FadeTransition(opacity: animation, child: child),
+                  duration: const Duration(seconds: 3),
+                  child: orientation == Orientation.portrait
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 15,
                           itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Container(
-                                  width: media.width,
-                                  height: media.height * .14,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: Colors.black)),
-                                  alignment: Alignment.center,
-                                  child: const Text("data"),
-                                ),
-                              ))),
-                ]
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Container(
+                              width: media.width,
+                              height: media.height * .14,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: Colors.black)),
+                              alignment: Alignment.center,
+                              child: const Text("data"),
+                            ),
+                          ),
+                        )
+                      : SizedBox(
+                          width: media.width,
+                          height: media.height,
+                          child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Container(
+                                      width: media.width,
+                                      height: media.height * .14,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border:
+                                              Border.all(color: Colors.black)),
+                                      alignment: Alignment.center,
+                                      child: const Text("data"),
+                                    ),
+                                  ))),
+                )
               ],
             ),
           ),
