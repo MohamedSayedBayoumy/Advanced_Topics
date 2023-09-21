@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 import 'home_page.dart';
 
-void main() {
+Future<void> main() async {
+  await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+
   runApp(const MyApp());
 }
 
