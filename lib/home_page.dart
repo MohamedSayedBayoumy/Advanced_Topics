@@ -2,6 +2,7 @@ import 'package:animation_example/responsive/check_portrait_or_landscap.dart';
 import 'package:flutter/material.dart';
 import 'animation/ainmation_rotation.dart';
 import 'animation/ainmation_switcher.dart';
+import 'animation/animation_scale.dart';
 import 'models/topics_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,6 +22,8 @@ class _HomePageState extends State<HomePage> {
         topicPage: const AnimatedSwitcherWidget()),
     TopicsModel(
         topicName: "Rotation Animation", topicPage: const RotationAnimation()),
+    TopicsModel(
+        topicName: "Scale Animation", topicPage: const ScaleAnimation()),
   ];
 
   @override
