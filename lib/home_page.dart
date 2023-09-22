@@ -2,6 +2,7 @@ import 'package:animation_example/animation/ainmation_algin.dart';
 import 'package:animation_example/responsive/check_portrait_or_landscap.dart';
 import 'package:flutter/material.dart';
 import 'animation/ainmation_rotation.dart';
+import 'animation/ainmation_size.dart';
 import 'animation/ainmation_switcher.dart';
 import 'animation/animation_scale.dart';
 import 'models/topics_model.dart';
@@ -27,13 +28,13 @@ class _HomePageState extends State<HomePage> {
         topicName: "Scale Animation", topicPage: const ScaleAnimation()),
     TopicsModel(
         topicName: "Algin Animation", topicPage: const AlginAnimation()),
+    TopicsModel(topicName: "Size Animation", topicPage: const SizeAnimation()),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
- 
       body: Padding(
         padding: const EdgeInsets.only(top: 50),
         child: ListView.builder(
