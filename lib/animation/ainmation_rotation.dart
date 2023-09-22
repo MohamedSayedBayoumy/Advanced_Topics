@@ -25,6 +25,8 @@ class _RotationAnimationState extends State<RotationAnimation>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+
       body: Center(
         child: RotationTransition(
             turns: turns!, child: const FlutterLogo(size: 100)),

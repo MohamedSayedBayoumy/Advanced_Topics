@@ -27,6 +27,8 @@ class _AnimatedSwitcherWidgetState extends State<AnimatedSwitcherWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
