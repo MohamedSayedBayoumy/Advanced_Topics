@@ -5,6 +5,7 @@ import 'animation/ainmation_rotation.dart';
 import 'animation/ainmation_size.dart';
 import 'animation/ainmation_switcher.dart';
 import 'animation/animation_scale.dart';
+import 'drag_drop_widget/drag_and_drop_screen.dart';
 import 'models/topics_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,14 @@ class _HomePageState extends State<HomePage> {
         topicName: "Scale Animation", topicPage: const ScaleAnimation()),
     TopicsModel(
         topicName: "Algin Animation", topicPage: const AlginAnimation()),
-    TopicsModel(topicName: "Size Animation", topicPage: const SizeAnimation()),
+    TopicsModel(
+      topicName: "Size Animation",
+      topicPage: const SizeAnimation(),
+    ),
+    TopicsModel(
+      topicName: "Drag and Drop Animation",
+      topicPage: const DragAndDropExample(),
+    ),
   ];
 
   @override
