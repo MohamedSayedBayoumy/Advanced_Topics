@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
@@ -7,17 +6,19 @@ import 'home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
+   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
-    ], //هنا ان بحط الشكل الي انا عايزه يظهر بس في التطبيق
+    ],  //هنا ان بحط الشكل الي انا عايزه يظهر بس في التطبيق
   );
-  runApp(
-    DevicePreview(
-      builder: (context) => const MyApp(),
-    ),
-  );
+
+  runApp(const MyApp());
+  // runApp(
+  //   DevicePreview(
+  //     builder: (context) => const MyApp(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatefulWidget {

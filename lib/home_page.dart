@@ -7,6 +7,7 @@ import 'animation/ainmation_switcher.dart';
 import 'animation/animation_scale.dart';
 import 'drag_drop_widget/drag_and_drop_screen.dart';
 import 'models/topics_model.dart';
+import 'voice/voice_feature.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +37,10 @@ class _HomePageState extends State<HomePage> {
     TopicsModel(
       topicName: "Drag and Drop Animation",
       topicPage: const DragAndDropExample(),
+    ),
+     TopicsModel(
+      topicName: "Voice Feature",
+      topicPage: const RecordFeature(),
     ),
   ];
 
