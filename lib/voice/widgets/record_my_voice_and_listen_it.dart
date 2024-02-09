@@ -26,7 +26,13 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
       ..sampleRate = 16000;
   }
 
+  PlayerController? playerController;
+
   File? fileRecord;
+
+  void _initialiseController2() {
+    playerController = PlayerController();
+  }
 
   startRecord() async {
     await record.startRecorder(toFile: "audio");
@@ -44,7 +50,10 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
   @override
   void initState() {
     super.initState();
+    _initialiseController2();
+
     _initialiseController();
+    setState(() {});
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       audio = AudioPlayer();
       await record.openRecorder();
@@ -82,9 +91,12 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
                   if (record.isRecording == false) {
                     await startRecord();
                     await recorderController.record();
+                    // await playerController.startPlayer();
                     setState(() {});
                   } else {
                     await stop();
+                    await recorderController.pause();
+                    // await playerController.stopPlayer();
                   }
 
                   setState(() {});
@@ -94,40 +106,59 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
             ? Center(
                 child: ElevatedButton(
                     onPressed: () async {
-                      audio.play(DeviceFileSource(fileRecord!.path));
+                      playerController!
+                          .preparePlayer(path: fileRecord!.path)
+                          .whenComplete(() async {
+                        // audio.play(DeviceFileSource(fileRecord!.path));
+                        playerController!.startPlayer();
+                        // playerController!.
+                      });
+                      // recorderController.reset(); // remove
                     },
                     child: const Text("Listen")))
             : Container(),
-        // AudioWaveforms(
-        //   size: Size(MediaQuery.of(context).size.width, 200.0),
-        //   recorderController: recorderController,
-        // ),
-        AudioWaveforms(
-          enableGesture: true,
-          size: Size(MediaQuery.of(context).size.width / 2, 50),
-          recorderController: recorderController,
-          waveStyle: const WaveStyle(
-            waveColor: Colors.white,
-            extendWaveform: true,
-            showMiddleLine: false,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: const Color(0xFF1E1B26),
-          ),
-          padding: const EdgeInsets.only(left: 18),
-          margin: const EdgeInsets.symmetric(horizontal: 15),
-        ),
-        // IconButton(
-        //     icon: const Icon(Icons.mic),
-        //     tooltip: 'Start recording',
-        //     onPressed: _startRecording)
+        fileRecord != null
+            ? Container(
+                color: Colors.amber,
+                child: AudioFileWaveforms(
+                  enableSeekGesture: true,
+                  size: const Size(300, 80),
+                  playerController: playerController!,
+                  backgroundColor: Colors.orange,
+                  playerWaveStyle: PlayerWaveStyle(
+                      seekLineColor: Colors.transparent,
+                      spacing: 5,
+                      backgroundColor: Colors.black,
+                      fixedWaveColor: Colors.grey.shade300,
+                      liveWaveColor: Colors.white,
+                      waveCap: StrokeCap.round,
+                      scaleFactor: 240.0),
+                ),
+              )
+            : AudioWaveforms(
+                enableGesture: true,
+                size: const Size(80, 50),
+                shouldCalculateScrolledPosition: true,
+                recorderController: recorderController,
+                waveStyle: WaveStyle(
+                    waveColor: Colors.grey.shade300,
+                    extendWaveform: true,
+                    showMiddleLine: false,
+                    scaleFactor: 50.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                padding: const EdgeInsets.only(left: 0),
+                margin: const EdgeInsets.symmetric(horizontal: 0),
+              ),
       ],
     );
   }
 
-  // void _startRecording() async {
-  //   await recorderController.record(path);
-  //   // update state here to, for eample, change the button's state
+  // void _playandPause() async {
+  //   final x = playerController.playerState;
+  //   x == x.isPlaying
+  //       ? await playerController.pausePlayer()
+  //       : await playerController.startPlayer(finishMode: FinishMode.loop);
   // }
 }
