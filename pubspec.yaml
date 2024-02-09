@@ -41,6 +41,8 @@ dependencies:
   audioplayers:
   file_picker:
   assets_audio_player:
+  audio_waveforms: ^1.0.4
+  # flutter_alarm_clock:
   
 dev_dependencies:
   flutter_driver:

@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
 
 class RecordMyVoice extends StatefulWidget {
   const RecordMyVoice({super.key});
@@ -16,6 +17,14 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
   final record = FlutterSoundRecorder();
 
   late AudioPlayer audio;
+  late final RecorderController recorderController;
+  void _initialiseController() {
+    recorderController = RecorderController()
+      ..androidEncoder = AndroidEncoder.aac
+      ..androidOutputFormat = AndroidOutputFormat.mpeg4
+      ..iosEncoder = IosEncoder.kAudioFormatMPEG4AAC
+      ..sampleRate = 16000;
+  }
 
   File? fileRecord;
 
@@ -35,6 +44,7 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
   @override
   void initState() {
     super.initState();
+    _initialiseController();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       audio = AudioPlayer();
       await record.openRecorder();
@@ -71,6 +81,8 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
                 onPressed: () async {
                   if (record.isRecording == false) {
                     await startRecord();
+                    await recorderController.record();
+                    setState(() {});
                   } else {
                     await stop();
                   }
@@ -86,7 +98,36 @@ class _RecordMyVoiceState extends State<RecordMyVoice> {
                     },
                     child: const Text("Listen")))
             : Container(),
+        // AudioWaveforms(
+        //   size: Size(MediaQuery.of(context).size.width, 200.0),
+        //   recorderController: recorderController,
+        // ),
+        AudioWaveforms(
+          enableGesture: true,
+          size: Size(MediaQuery.of(context).size.width / 2, 50),
+          recorderController: recorderController,
+          waveStyle: const WaveStyle(
+            waveColor: Colors.white,
+            extendWaveform: true,
+            showMiddleLine: false,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            color: const Color(0xFF1E1B26),
+          ),
+          padding: const EdgeInsets.only(left: 18),
+          margin: const EdgeInsets.symmetric(horizontal: 15),
+        ),
+        // IconButton(
+        //     icon: const Icon(Icons.mic),
+        //     tooltip: 'Start recording',
+        //     onPressed: _startRecording)
       ],
     );
   }
+
+  // void _startRecording() async {
+  //   await recorderController.record(path);
+  //   // update state here to, for eample, change the button's state
+  // }
 }
