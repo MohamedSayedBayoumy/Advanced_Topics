@@ -6,6 +6,7 @@ import 'animation/ainmation_size.dart';
 import 'animation/ainmation_switcher.dart';
 import 'animation/animation_scale.dart';
 import 'drag_drop_widget/drag_and_drop_screen.dart';
+import 'drag_drop_widget/tap.dart';
 import 'models/topics_model.dart';
 import 'voice/voice_feature.dart';
 
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     TopicsModel(
         topicName: "Scale Animation", topicPage: const ScaleAnimation()),
     TopicsModel(
-        topicName: "Algin Animation", topicPage: const AlginAnimation()),
+        topicName: "Algin Animation", topicPage: const AlginAnimationss()),
     TopicsModel(
       topicName: "Size Animation",
       topicPage: const SizeAnimation(),
@@ -38,7 +39,11 @@ class _HomePageState extends State<HomePage> {
       topicName: "Drag and Drop Animation",
       topicPage: const DragAndDropExample(),
     ),
-     TopicsModel(
+    TopicsModel(
+      topicName: "Whats icon record",
+      topicPage: const DraggableContainer(),
+    ),
+    TopicsModel(
       topicName: "Voice Feature",
       topicPage: const RecordFeature(),
     ),
