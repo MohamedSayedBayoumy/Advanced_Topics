@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     TopicsModel(
         topicName: "Scale Animation", topicPage: const ScaleAnimation()),
     TopicsModel(
-        topicName: "Algin Animation", topicPage: const AlginAnimationss()),
+        topicName: "Algin Animation", topicPage: const AlginAnimation()),
     TopicsModel(
       topicName: "Size Animation",
       topicPage: const SizeAnimation(),
